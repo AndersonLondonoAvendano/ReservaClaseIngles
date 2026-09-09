@@ -2,7 +2,6 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { colors, spacing } from "../theme";
 
-
 export default function EtiquetaNivel( { nivel } ){
     return (
         <View style={[styles.contenedor, styles.contenedor.backgroundColor]}>
