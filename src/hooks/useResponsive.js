@@ -13,6 +13,5 @@ export default function useResponsive() {
     columnas: esTablet ? 2 : 1,
     ancho: esTablet ? 320 : Math.min(width * 0.72, 300),
     paddingHorizontal: esTablet ? 32 : 16,
-    
   };
 }

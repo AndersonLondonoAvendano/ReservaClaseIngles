@@ -17,11 +17,15 @@ import { NIVELES, CLASES, formatearPrecio } from "../data/clases";
 import NivelChip from "../components/NivelChip";
 import Card from "../components/Card";
 import UseResponsive from "../hooks/useResponsive";
+import EstadoVacio from "../components/EstadoVacio";
+import useResponsive from "../hooks/useResponsive";
 
 export default function HomeScreen({ navigation }) {
   const [nivel, setNivel] = useState("");
   const [busqueda, setBusqueda] = useState("");
   const inset = useSafeAreaInsets();
+  const { columnas, paddingHorizontal } = useResponsive();
+  
 
   const resultados = useMemo(() => {
     const textoBusqueda = busqueda.trim().toLowerCase();
@@ -87,12 +91,21 @@ export default function HomeScreen({ navigation }) {
           />
         )}
         contentContainerStyle={{
-
           paddingHorizontal,
-          flexGrow: 1
-
+          flexGrow: 1,
         }}
-
+        numColumns={columnas}
+        ListEmptyComponent={
+          <EstadoVacio
+            icono="search-outline"
+            titulo="No encontramos resultados"
+            mensaje="Prueba con otra combinación de palabras para la busqueda"
+            onAction={() => {
+              setNivel("Todos");
+              setBusqueda("");
+            }}
+          />
+        }
       />
     </View>
   );
