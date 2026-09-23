@@ -24,7 +24,7 @@ const style = StyleSheet.create({
     borderRadius: radius.full,
     backgroundColor: "#2e3fff",
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: colors.borde,
     marginRight: spacing.sm,
   },
   chipActivo: {

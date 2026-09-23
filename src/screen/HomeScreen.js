@@ -29,17 +29,14 @@ export default function HomeScreen({ navigation }) {
 
   const resultados = useMemo(() => {
     const textoBusqueda = busqueda.trim().toLowerCase();
-    return CLASES.filter(() => {
-      (clase) => {
-        const coincideNivel = nivel === "Todos" || clase.nivel === nivel;
-        const coincideTexto =
-          textoBusqueda ||
-          textoBusqueda === "" ||
-          clase.profesor.nombre.toLowerCase().includes(textoBusqueda) ||
-          clase.titulo.toLowerCase().includes(textoBusqueda);
+    return CLASES.filter((clase) => {
+      const coincideNivel = nivel === "Todos" || nivel === "" || clase.nivel === nivel;
+      const coincideTexto =
+        textoBusqueda === "" ||
+        clase.profesor.nombre.toLowerCase().includes(textoBusqueda) ||
+        clase.titulo.toLowerCase().includes(textoBusqueda);
 
-        return coincideNivel && coincideTexto;
-      };
+      return coincideNivel && coincideTexto;
     });
   }, [nivel, busqueda]);
 
@@ -70,7 +67,7 @@ export default function HomeScreen({ navigation }) {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        style={{ flexGrow: 0 }}
+        style={{ flexGrow: 0, margin:10 }}
       >
         {NIVELES.map((item) => (
           <NivelChip
@@ -81,10 +78,11 @@ export default function HomeScreen({ navigation }) {
           />
         ))}
       </ScrollView>
+      
       <FlatList
         data={resultados}
         keyExtractor={(item) => item.id}
-        renderItem={(item) => (
+        renderItem={({ item }) => (
           <Card
             clase={item}
             onPress={() => navigation.navigate("DetalleClase", { clase: item })}
